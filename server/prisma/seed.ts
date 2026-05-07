@@ -42,6 +42,10 @@ async function main() {
       email: 'f.wonder@example.com',
       name: 'f Wonder',
     },
+    {
+      email: 'd.wonder@example.com',
+      name: 'd Wonder',
+    },
   ];
 
   for (const u of users) {

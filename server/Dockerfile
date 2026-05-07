@@ -2,12 +2,11 @@ FROM node:22-alpine
 
 WORKDIR /app
 
-COPY package*.json ./
+COPY --chown=node:node package*.json ./
 RUN npm ci
 
-COPY . .
+COPY --chown=node:node . .
 RUN npm run prisma:generate
-RUN chown -R node:node /app
 
 USER node
 

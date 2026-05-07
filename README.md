@@ -12,3 +12,6 @@ SEED:
 npm run dev:seed
 # Or manually:
 docker compose -f docker-compose.yml -f docker-compose.dev.yml exec server npx prisma db seed
+
+STUDIO:
+Available at: http://localhost:5556
