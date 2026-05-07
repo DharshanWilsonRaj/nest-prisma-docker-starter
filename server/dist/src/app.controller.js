@@ -1,4 +1,3 @@
-"use strict";
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -11,10 +10,8 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var __param = (this && this.__param) || function (paramIndex, decorator) {
     return function (target, key) { decorator(target, key, paramIndex); }
 };
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.AppController = void 0;
-const common_1 = require("@nestjs/common");
-const app_service_1 = require("./app.service");
+import { Controller, Get, Query, Param, ParseIntPipe } from '@nestjs/common';
+import { AppService } from './app.service.js';
 let AppController = class AppController {
     appService;
     constructor(appService) {
@@ -42,51 +39,51 @@ let AppController = class AppController {
         return this.appService.getUserById(id);
     }
 };
-exports.AppController = AppController;
 __decorate([
-    (0, common_1.Get)(),
+    Get(),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", String)
 ], AppController.prototype, "getHello", null);
 __decorate([
-    (0, common_1.Get)('health'),
+    Get('health'),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", Promise)
 ], AppController.prototype, "getHealth", null);
 __decorate([
-    (0, common_1.Get)('backend-health'),
+    Get('backend-health'),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", Promise)
 ], AppController.prototype, "getBackendHealth", null);
 __decorate([
-    (0, common_1.Get)('users'),
-    __param(0, (0, common_1.Query)('page')),
-    __param(1, (0, common_1.Query)('limit')),
+    Get('users'),
+    __param(0, Query('page')),
+    __param(1, Query('limit')),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [String, String]),
     __metadata("design:returntype", Promise)
 ], AppController.prototype, "getAllUsers", null);
 __decorate([
-    (0, common_1.Get)('users/search'),
-    __param(0, (0, common_1.Query)('email')),
-    __param(1, (0, common_1.Query)('page')),
-    __param(2, (0, common_1.Query)('limit')),
+    Get('users/search'),
+    __param(0, Query('email')),
+    __param(1, Query('page')),
+    __param(2, Query('limit')),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [String, String, String]),
     __metadata("design:returntype", Promise)
 ], AppController.prototype, "searchUsers", null);
 __decorate([
-    (0, common_1.Get)('users/:id'),
-    __param(0, (0, common_1.Param)('id', common_1.ParseIntPipe)),
+    Get('users/:id'),
+    __param(0, Param('id', ParseIntPipe)),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Number]),
     __metadata("design:returntype", Promise)
 ], AppController.prototype, "getUserById", null);
-exports.AppController = AppController = __decorate([
-    (0, common_1.Controller)(),
-    __metadata("design:paramtypes", [app_service_1.AppService])
+AppController = __decorate([
+    Controller(),
+    __metadata("design:paramtypes", [AppService])
 ], AppController);
+export { AppController };
 //# sourceMappingURL=app.controller.js.map
