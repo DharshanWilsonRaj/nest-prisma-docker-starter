@@ -4,4 +4,11 @@ docker compose -f docker-compose.yml -f docker-compose.build.yml up --build -d
 
 
 MIGRATION:
-docker compose -f docker-compose.dev.yml run --rm server npx prisma migrate dev --name <migration_name>
+npm run dev:migrate -- <migration_name>
+# Or manually:
+docker compose -f docker-compose.yml -f docker-compose.dev.yml run --rm --user root server npx prisma migrate dev --name <migration_name>
+
+SEED:
+npm run dev:seed
+# Or manually:
+docker compose -f docker-compose.yml -f docker-compose.dev.yml exec server npx prisma db seed

@@ -10,7 +10,9 @@
     "up:build": "docker compose -f docker-compose.yml -f docker-compose.build.yml up --build -d",
     "dev:migrate": "docker compose -f docker-compose.yml -f docker-compose.dev.yml run --rm --user root server npx prisma migrate dev --name",
     "dev:migrate:reset": "docker compose -f docker-compose.yml -f docker-compose.dev.yml run --rm --user root server npx prisma migrate reset",
-    "build:migrate": "docker compose -f docker-compose.yml -f docker-compose.build.yml run --rm --user root server npx prisma migrate dev --name"
+    "dev:seed": "docker compose -f docker-compose.yml -f docker-compose.dev.yml exec server npx prisma db seed",
+    "build:migrate": "docker compose -f docker-compose.yml -f docker-compose.build.yml run --rm --user root server npx prisma migrate dev --name",
+    "build:seed": "docker compose -f docker-compose.yml -f docker-compose.build.yml exec server npx prisma db seed"
   },
   "keywords": [
     "nestjs",
