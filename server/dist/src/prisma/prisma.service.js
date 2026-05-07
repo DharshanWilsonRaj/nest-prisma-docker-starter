@@ -1,4 +1,3 @@
-"use strict";
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -8,19 +7,17 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.PrismaService = void 0;
-const common_1 = require("@nestjs/common");
-const adapter_pg_1 = require("@prisma/adapter-pg");
-const client_1 = require("@prisma/client");
-let PrismaService = class PrismaService extends client_1.PrismaClient {
+import { Injectable } from '@nestjs/common';
+import { PrismaPg } from '@prisma/adapter-pg';
+import { PrismaClient } from '@prisma/client';
+let PrismaService = class PrismaService extends PrismaClient {
     constructor() {
         const connectionString = process.env.DATABASE_URL;
         if (!connectionString) {
             throw new Error('DATABASE_URL is required to initialize Prisma Client.');
         }
         super({
-            adapter: new adapter_pg_1.PrismaPg({ connectionString }),
+            adapter: new PrismaPg({ connectionString }),
         });
     }
     async onModuleInit() {
@@ -32,9 +29,9 @@ let PrismaService = class PrismaService extends client_1.PrismaClient {
         });
     }
 };
-exports.PrismaService = PrismaService;
-exports.PrismaService = PrismaService = __decorate([
-    (0, common_1.Injectable)(),
+PrismaService = __decorate([
+    Injectable(),
     __metadata("design:paramtypes", [])
 ], PrismaService);
+export { PrismaService };
 //# sourceMappingURL=prisma.service.js.map

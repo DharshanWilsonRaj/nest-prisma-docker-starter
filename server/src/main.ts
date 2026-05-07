@@ -1,8 +1,8 @@
 import { config } from 'dotenv';
 import { resolve } from 'path';
 import { NestFactory } from '@nestjs/core';
-import { AppModule } from './app.module';
-import { PrismaService } from './prisma/prisma.service';
+import { AppModule } from './app.module.js';
+import { PrismaService } from './prisma/prisma.service.js';
 
 config({ path: resolve(process.cwd(), '../.env') });
 
