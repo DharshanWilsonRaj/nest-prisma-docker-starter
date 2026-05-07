@@ -33,7 +33,7 @@ let AppService = class AppService {
             return {
                 status: 'healthy',
                 server: 'running',
-                database: 'connected',
+                database: 'production-connected',
                 timestamp: new Date().toISOString(),
             };
         }
@@ -46,6 +46,92 @@ let AppService = class AppService {
                 timestamp: new Date().toISOString(),
             };
         }
+    }
+    async getAllUsers(page = 1, limit = 10) {
+        const skip = (page - 1) * limit;
+        const [users, total] = await Promise.all([
+            this.prisma.user.findMany({
+                skip,
+                take: limit,
+                orderBy: { createdAt: 'desc' },
+                select: {
+                    id: true,
+                    email: true,
+                    name: true,
+                    createdAt: true,
+                    updatedAt: true,
+                },
+            }),
+            this.prisma.user.count(),
+        ]);
+        return {
+            data: users,
+            pagination: {
+                total,
+                page,
+                limit,
+                totalPages: Math.ceil(total / limit),
+            },
+        };
+    }
+    async searchUsersByEmail(email, page = 1, limit = 10) {
+        const skip = (page - 1) * limit;
+        const [users, total] = await Promise.all([
+            this.prisma.user.findMany({
+                where: {
+                    email: {
+                        contains: email,
+                        mode: 'insensitive',
+                    },
+                },
+                skip,
+                take: limit,
+                orderBy: { createdAt: 'desc' },
+                select: {
+                    id: true,
+                    email: true,
+                    name: true,
+                    createdAt: true,
+                    updatedAt: true,
+                },
+            }),
+            this.prisma.user.count({
+                where: {
+                    email: {
+                        contains: email,
+                        mode: 'insensitive',
+                    },
+                },
+            }),
+        ]);
+        return {
+            data: users,
+            pagination: {
+                total,
+                page,
+                limit,
+                totalPages: Math.ceil(total / limit),
+            },
+        };
+    }
+    async getUserById(id) {
+        return this.prisma.user.findUnique({
+            where: { id },
+            select: {
+                id: true,
+                email: true,
+                name: true,
+                createdAt: true,
+                updatedAt: true,
+                posts: {
+                    select: {
+                        id: true,
+                        title: true,
+                        published: true,
+                    },
+                },
+            },
+        });
     }
 };
 exports.AppService = AppService;

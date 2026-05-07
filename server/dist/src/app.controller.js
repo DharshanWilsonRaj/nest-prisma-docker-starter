@@ -8,6 +8,9 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+var __param = (this && this.__param) || function (paramIndex, decorator) {
+    return function (target, key) { decorator(target, key, paramIndex); }
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.AppController = void 0;
 const common_1 = require("@nestjs/common");
@@ -25,6 +28,18 @@ let AppController = class AppController {
     }
     async getBackendHealth() {
         return this.appService.getBackendHealth();
+    }
+    async getAllUsers(page = '1', limit = '10') {
+        return this.appService.getAllUsers(Number(page), Number(limit));
+    }
+    async searchUsers(email = '', page = '1', limit = '10') {
+        if (!email) {
+            return this.appService.getAllUsers(Number(page), Number(limit));
+        }
+        return this.appService.searchUsersByEmail(email, Number(page), Number(limit));
+    }
+    async getUserById(id) {
+        return this.appService.getUserById(id);
     }
 };
 exports.AppController = AppController;
@@ -46,6 +61,30 @@ __decorate([
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", Promise)
 ], AppController.prototype, "getBackendHealth", null);
+__decorate([
+    (0, common_1.Get)('users'),
+    __param(0, (0, common_1.Query)('page')),
+    __param(1, (0, common_1.Query)('limit')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String, String]),
+    __metadata("design:returntype", Promise)
+], AppController.prototype, "getAllUsers", null);
+__decorate([
+    (0, common_1.Get)('users/search'),
+    __param(0, (0, common_1.Query)('email')),
+    __param(1, (0, common_1.Query)('page')),
+    __param(2, (0, common_1.Query)('limit')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String, String, String]),
+    __metadata("design:returntype", Promise)
+], AppController.prototype, "searchUsers", null);
+__decorate([
+    (0, common_1.Get)('users/:id'),
+    __param(0, (0, common_1.Param)('id', common_1.ParseIntPipe)),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Number]),
+    __metadata("design:returntype", Promise)
+], AppController.prototype, "getUserById", null);
 exports.AppController = AppController = __decorate([
     (0, common_1.Controller)(),
     __metadata("design:paramtypes", [app_service_1.AppService])

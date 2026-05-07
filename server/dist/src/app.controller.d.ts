@@ -20,4 +20,46 @@ export declare class AppController {
         error: string;
         timestamp: string;
     }>;
+    getAllUsers(page?: string, limit?: string): Promise<{
+        data: {
+            id: number;
+            email: string;
+            name: string | null;
+            createdAt: Date;
+            updatedAt: Date;
+        }[];
+        pagination: {
+            total: number;
+            page: number;
+            limit: number;
+            totalPages: number;
+        };
+    }>;
+    searchUsers(email?: string, page?: string, limit?: string): Promise<{
+        data: {
+            id: number;
+            email: string;
+            name: string | null;
+            createdAt: Date;
+            updatedAt: Date;
+        }[];
+        pagination: {
+            total: number;
+            page: number;
+            limit: number;
+            totalPages: number;
+        };
+    }>;
+    getUserById(id: number): Promise<{
+        id: number;
+        email: string;
+        name: string | null;
+        createdAt: Date;
+        updatedAt: Date;
+        posts: {
+            id: number;
+            title: string;
+            published: boolean;
+        }[];
+    } | null>;
 }
