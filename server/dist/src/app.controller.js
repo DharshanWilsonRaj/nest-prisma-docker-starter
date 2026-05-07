@@ -23,6 +23,9 @@ let AppController = class AppController {
     async getHealth() {
         return this.appService.getHealth();
     }
+    async getBackendHealth() {
+        return this.appService.getBackendHealth();
+    }
 };
 exports.AppController = AppController;
 __decorate([
@@ -37,6 +40,12 @@ __decorate([
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", Promise)
 ], AppController.prototype, "getHealth", null);
+__decorate([
+    (0, common_1.Get)('backend-health'),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", []),
+    __metadata("design:returntype", Promise)
+], AppController.prototype, "getBackendHealth", null);
 exports.AppController = AppController = __decorate([
     (0, common_1.Controller)(),
     __metadata("design:paramtypes", [app_service_1.AppService])

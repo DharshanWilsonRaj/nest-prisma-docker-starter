@@ -7,4 +7,17 @@ export declare class AppService {
         status: string;
         database: string;
     }>;
+    getBackendHealth(): Promise<{
+        status: string;
+        server: string;
+        database: string;
+        timestamp: string;
+        error?: undefined;
+    } | {
+        status: string;
+        server: string;
+        database: string;
+        error: string;
+        timestamp: string;
+    }>;
 }

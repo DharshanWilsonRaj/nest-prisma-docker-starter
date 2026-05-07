@@ -17,4 +17,25 @@ export class AppService {
       database: 'connected',
     };
   }
+
+  async getBackendHealth() {
+    try {
+      await this.prisma.$queryRaw`SELECT 1`;
+
+      return {
+        status: 'healthy',
+        server: 'running',
+        database: 'production-connected',
+        timestamp: new Date().toISOString(),
+      };
+    } catch (error) {
+      return {
+        status: 'unhealthy',
+        server: 'running',
+        database: 'disconnected',
+        error: error instanceof Error ? error.message : 'Unknown error',
+        timestamp: new Date().toISOString(),
+      };
+    }
+  }
 }
