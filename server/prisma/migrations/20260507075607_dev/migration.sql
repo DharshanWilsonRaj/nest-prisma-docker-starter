@@ -1,8 +1,0 @@
-/*
-  Warnings:
-
-  - You are about to drop the column `post_comment` on the `Post` table. All the data in the column will be lost.
-
-*/
--- AlterTable
-ALTER TABLE "Post" DROP COLUMN "post_comment";

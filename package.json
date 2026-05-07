@@ -9,6 +9,7 @@
     "down:build": "docker compose -f docker-compose.yml -f docker-compose.build.yml down --remove-orphans",
     "up:build": "docker compose -f docker-compose.yml -f docker-compose.build.yml up --build -d",
     "dev:migrate": "docker compose -f docker-compose.yml -f docker-compose.dev.yml run --rm --user root server npx prisma migrate dev --name",
+    "dev:migrate:reset": "docker compose -f docker-compose.yml -f docker-compose.dev.yml run --rm --user root server npx prisma migrate reset",
     "build:migrate": "docker compose -f docker-compose.yml -f docker-compose.build.yml run --rm --user root server npx prisma migrate dev --name"
   },
   "keywords": [
