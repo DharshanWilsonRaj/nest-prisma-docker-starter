@@ -1,0 +1,13 @@
+{
+  "Servers": {
+    "1": {
+      "Name": "App PostgreSQL",
+      "Group": "Servers",
+      "Host": "${POSTGRES_HOST}",
+      "Port": ${POSTGRES_PORT},
+      "MaintenanceDB": "${POSTGRES_DB}",
+      "Username": "${POSTGRES_USER}",
+      "SSLMode": "prefer"
+    }
+  }
+}
