@@ -1,0 +1,21 @@
+{
+  "name": "nest-prisma-docker",
+  "version": "1.0.0",
+  "description": "NestJS + Prisma + Docker project",
+  "private": true,
+  "scripts": {
+    "down:dev": "docker compose -f docker-compose.yml -f docker-compose.dev.yml down --remove-orphans",
+    "up:dev": "docker compose -f docker-compose.yml -f docker-compose.dev.yml up --build -d",
+    "down:build": "docker compose -f docker-compose.yml -f docker-compose.build.yml down --remove-orphans",
+    "up:build": "docker compose -f docker-compose.yml -f docker-compose.build.yml up --build -d"
+
+  },
+  "keywords": [
+    "nestjs",
+    "prisma",
+    "docker",
+    "postgres"
+  ],
+  "author": "",
+  "license": "UNLICENSED"
+}

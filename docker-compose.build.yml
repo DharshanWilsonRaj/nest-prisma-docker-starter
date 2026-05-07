@@ -40,3 +40,31 @@ services:
         condition: service_healthy
     networks:
       - app-network
+      
+  prisma-studio:
+    build:
+      context: ./server
+      dockerfile: Dockerfile
+    container_name: ${PRISMA_STUDIO_CONTAINER_NAME}
+    restart: unless-stopped
+    env_file:
+      - .env
+    environment:
+      DATABASE_URL: ${DATABASE_URL}
+    command: npm run prisma:studio -- --port ${PRISMA_STUDIO_PORT}
+    ports:
+      - "${PRISMA_STUDIO_PORT}:${PRISMA_STUDIO_PORT}"
+    volumes:
+      - ./server:/app
+      - /app/node_modules
+    depends_on:
+      postgres:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD-SHELL", "node -e \"fetch('http://127.0.0.1:' + process.env.PRISMA_STUDIO_PORT).then((res) => process.exit(res.ok ? 0 : 1)).catch(() => process.exit(1))\""]
+      interval: 15s
+      timeout: 5s
+      retries: 10
+      start_period: 20s
+    networks:
+      - app-network
